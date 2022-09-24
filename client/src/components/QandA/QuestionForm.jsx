@@ -12,6 +12,9 @@ import {
 } from "../../styleComponents.jsx";
 
 const QuestionForm = ({ product, setShowQForm }) => {
+
+  const QA_BASE_URL = 'http://ec2-3-86-243-158.compute-1.amazonaws.com'
+
   // variable
   let emailValid = false;
 
@@ -34,9 +37,9 @@ const QuestionForm = ({ product, setShowQForm }) => {
         product_id: product.id,
       };
       axios
-        .post("/qa/questions", data, config)
+        .post(`${QA_BASE_URL}/qa/questions`, data)
         .then(() =>
-          axios.get(`/qa/questions?product_id=${product.id}&count=100`, config)
+          axios.get(`${QA_BASE_URL}/qa/questions?product_id=${product.id}`)
         )
         .then((response) => {
           response.data.results.sort(
