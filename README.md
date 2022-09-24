@@ -54,8 +54,10 @@ npm run server-dev & npm run client-dev
 ## Demos
 <details><summary>Product Overview</summary>
   
-![ProductOverview-Demo](https://github.com/freshprincefecflamongos2/Front-End-Capstone-FEC/blob/master/ProductOverviewDemo.gif?raw=true)
+
   
+![ProductOverviewDemo](https://user-images.githubusercontent.com/107714292/192119725-e824e865-fe7c-442a-ba27-d652395cef73.gif)
+
 </details>
 
 <details><summary>Questions & Answers</summary>
@@ -91,5 +93,5 @@ npm run server-dev & npm run client-dev
   ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
   ![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)
   
-
+![ProductOverview-Demo](https://github.com/freshprincefecflamongos2/Front-End-Capstone-FEC/blob/master/ProductOverviewDemo.gif?raw=true)
   
