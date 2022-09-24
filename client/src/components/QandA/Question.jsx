@@ -7,6 +7,10 @@ import styled from "styled-components";
 import questList from "./qAndA.js";
 
 const Question = ({ question, product }) => {
+
+  const QA_BASE_URL = 'http://ec2-3-86-243-158.compute-1.amazonaws.com'
+
+
   const {
     answers,
     asker_name,
@@ -29,7 +33,7 @@ const Question = ({ question, product }) => {
   const incHelp = () => {
     if (!ques.helpf_click) {
       axios
-        .put(`/qa/questions/${question_id}/helpful`, {}, config)
+        .put(`${QA_BASE_URL}/qa/questions/${question_id}/helpful`, {})
         .then(() => {
           ques.helpf_click = true;
           ques.question_helpfulness += 1;

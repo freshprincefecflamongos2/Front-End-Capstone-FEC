@@ -3,11 +3,19 @@ import ImageGallery from "./ImageGallery/ImageGallery.jsx";
 import ProductInfo from "./ProductInfo/ProductInfo.jsx";
 import StyleSelector from "./StyleSelector/StyleSelector.jsx";
 import AddToCart from "./AddToCart/AddToCart.jsx";
-import { config } from "../../../../env/config.js";
+//import { config } from "../../../../env/config.js";
 import axios from "axios";
 import styled from "styled-components";
 import { ClickTracker, DarkMode } from "../App.jsx";
 import SocialMedia from "./SocialMedia.jsx";
+
+const productsBaseUrl = {
+  baseURL: 'http://ec2-54-245-170-154.us-west-2.compute.amazonaws.com',
+};
+
+const reviewsBaseUrl = {
+  BaseUrl: 'http://54.162.76.39/'
+}
 
 const ProductOverview = ({ id, product }) => {
   const [styles, setStyles] = useState([]);
@@ -53,7 +61,7 @@ const ProductOverview = ({ id, product }) => {
 
   const getRatingsData = () => {
     axios
-      .get(`/reviews/meta?product_id=${id}`, config)
+      .get(`/reviews/meta?product_id=${id}`, reviewsBaseUrl)
       .then((response) => {
         setRatings(response.data.ratings);
       })
@@ -62,7 +70,7 @@ const ProductOverview = ({ id, product }) => {
 
   const getReviewData = () => {
     axios
-      .get(`/reviews?product_id=${id}&count=${100}`, config)
+      .get(`/reviews?product_id=${id}&count=${100}`, reviewsBaseUrl)
       .then((response) => {
         setNumberOfReviews(response.data.results.length);
       })
@@ -71,7 +79,7 @@ const ProductOverview = ({ id, product }) => {
 
   useEffect(() => {
     axios
-      .get(`/products/${id}/styles`, config)
+      .get(`/products/${id}/styles`, productsBaseUrl)
       .then((response) => {
         if (response.data.results.length === 0) {
           setStyles([]);
