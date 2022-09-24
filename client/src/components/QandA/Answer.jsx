@@ -11,6 +11,8 @@ import {
 } from "../../styleComponents.jsx";
 
 const Answer = ({ answer, question_id }) => {
+  const QA_BASE_URL = 'http://ec2-3-86-243-158.compute-1.amazonaws.com';
+
   const { answerer_name, body, date, helpfulness, id, photos } = answer;
 
   // variables
@@ -31,7 +33,7 @@ const Answer = ({ answer, question_id }) => {
   const incHelp = () => {
     if (!answ.helpf_click) {
       axios
-        .put(`/qa/answers/${id}/helpful`, {}, config)
+        .put(`${QA_BASE_URL}/qa/answers/${id}/helpful`, {})
         .then(() => {
           answ.helpf_click = true;
           answ.helpfulness += 1;
@@ -47,7 +49,7 @@ const Answer = ({ answer, question_id }) => {
 
   const reportAns = () => {
     axios
-      .put(`qa/answers/${id}/report`, {}, config)
+      .put(`${QA_BASE_URL}/qa/answers/${id}/report`, {})
       .then(() => {
         answ.reported = true;
         setReportSt(answ.reported);
@@ -66,7 +68,7 @@ const Answer = ({ answer, question_id }) => {
         </ModalOverlay>
       ) : null}
       <div>{body}</div>
-      {photos.length ? (
+      { photos && (
         <div>
           {photos.map((photo, i) => (
             <img
@@ -82,7 +84,7 @@ const Answer = ({ answer, question_id }) => {
             />
           ))}
         </div>
-      ) : null}
+      ) }
       <small>
         {"by "}
         {answerer_name === "Seller" ? <b>{answerer_name}</b> : answerer_name}

@@ -13,6 +13,8 @@ import {
 } from "../../styleComponents.jsx";
 
 const AnswerForm = ({ question, product, setShowAForm, setAnsState }) => {
+  const QA_BASE_URL = 'http://ec2-3-86-243-158.compute-1.amazonaws.com';
+
   // variable
   const { question_id, question_body } = question;
 
@@ -33,9 +35,9 @@ const AnswerForm = ({ question, product, setShowAForm, setAnsState }) => {
         photos: photos.slice(0, 5),
       };
       axios
-        .post(`/qa/questions/${question_id}/answers`, data, config)
+        .post(`${QA_BASE_URL}/qa/questions/${question_id}/answers`, data)
         .then(() =>
-          axios.get(`/qa/questions/${question_id}/answers?count=100`, config)
+          axios.get(`${QA_BASE_URL}/qa/questions/${question_id}/answers`)
         )
         .then((res) => {
           const ques = questList.find((q) => q.question_id === question_id);

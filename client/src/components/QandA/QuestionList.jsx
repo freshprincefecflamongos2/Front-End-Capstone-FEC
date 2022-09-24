@@ -11,6 +11,9 @@ import { ClickTracker } from "../App.jsx";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const QuestionList = ({ product }) => {
+  const QA_BASE_URL = 'http://ec2-3-86-243-158.compute-1.amazonaws.com'
+
+
   // variables
   const { id } = product;
 
@@ -28,7 +31,7 @@ const QuestionList = ({ product }) => {
   // on load
   useEffect(() => {
     axios
-      .get(`/qa/questions?product_id=${id}&count=100`, config)
+      .get(`${QA_BASE_URL}/qa/questions/${id}`)
       .then((response) => {
         response.data.results.sort(
           (a, b) => b.question_helpfulness - a.question_helpfulness
