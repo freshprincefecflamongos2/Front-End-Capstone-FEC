@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import axios from "axios";
-import { config } from "../../../env/config.js";
+//import { config } from "../../../env/config.js";
 import QuestionList from "./QandA/QuestionList.jsx";
 import RRIndex from "./Ratings_Reviews/index.jsx";
 import ProductOverview from "./ProductOverview/ProductOverview.jsx";
@@ -11,6 +11,11 @@ import { Button } from "../styleComponents.jsx";
 
 export const ClickTracker = React.createContext();
 export const DarkMode = React.createContext();
+
+const productsBaseUrl = {
+  baseURL: 'http://ec2-54-245-170-154.us-west-2.compute.amazonaws.com',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+};
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -22,9 +27,12 @@ const App = () => {
 
   // will set product to the first product in list
   // maybe set this up to be random later
+  // they are getting a random number out of the product list and distributing that id
+  // so if I only have ids on my main products, that should be fine (I could even get away without
+  // products id table)
   useEffect(() => {
     axios
-      .get("/products?count=10", config)
+      .get("/products", productsBaseUrl)
       .then((response) => {
         setProducts(response.data);
         let randInd = Math.floor(Math.random() * 1000);
